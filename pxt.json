@@ -6,6 +6,5 @@
     "files": [
         "mission1.ts"
     ],
-    "public": true,
-    "dependencies": {}
+    "public": true
 }
