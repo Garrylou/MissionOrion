@@ -1,0 +1,11 @@
+{
+    "name": "mission1",
+    "description": "Mission 1 micro:bit extension with button A checkmark feature",
+    "license": "MIT",
+    "version": "1.0.0",
+    "files": [
+        "mission1.ts"
+    ],
+    "public": true,
+    "dependencies": {}
+}
