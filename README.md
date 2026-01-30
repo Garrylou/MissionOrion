@@ -1,5 +1,16 @@
 # Mission 1 – micro:bit Extension
 
-Adds a Mission 1 block that reacts to Button A presses.
+Mission-based radio controller for classroom escape games.
 
-After a random number of presses (5 to 8), a checkmark appears on the LED matrix.
+## Features
+- Radio channel control
+- Random Button A trigger (5–8 presses)
+- Interference animation
+- Automatic channel shift (+2)
+- Return to base channel with confirmation
+
+## Usage
+Add the block:
+"Mission radio controller on channel X"
+
+Then press Button A during the mission.
