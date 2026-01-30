@@ -14,7 +14,7 @@ namespace mission1 {
      * Mission radio interference controller
      * @param channel base radio channel
      */
-    //% block="Mission radio interference on channel %channel"
+    //% block="Mission station spatiale # %channel"
     //% channel.min=0 channel.max=83
     export function missionInterference(channel: number): void {
 
