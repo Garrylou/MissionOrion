@@ -1,5 +1,5 @@
 /**
- * Mission 1 – Automatic Radio Interference
+ * Mission 1 – Radio Interference (Count-based)
  */
 //% color="#FF8000" weight=100 icon="\uf1eb"
 namespace mission1 {
@@ -11,7 +11,7 @@ namespace mission1 {
     let initialized = false
 
     /**
-     * Mission radio interference on channel %channel
+     * Mission radio interference controller
      * @param channel base radio channel
      */
     //% block="Mission radio interference on channel %channel"
@@ -27,51 +27,48 @@ namespace mission1 {
         triggerAt = randint(4, 6)
 
         radio.setGroup(baseChannel)
-
-        // Background task
-        control.inBackground(function () {
-            while (true) {
-
-                // 📡 Send a normal radio packet
-                radio.sendNumber(1)
-                sendCount++
-
-                // ⚡ SHIFT TO +2 → INTERFERENCE
-                if (!shifted && sendCount >= triggerAt) {
-                    radio.setGroup(baseChannel + 2)
-                    shifted = true
-                    sendInterference()
-                    showInterference()
-                }
-
-                // 🔁 RETURN TO BASE AFTER NEXT CYCLE
-                else if (shifted && sendCount >= triggerAt + 1) {
-                    radio.setGroup(baseChannel)
-                    shifted = false
-                    sendCount = 0
-                    triggerAt = randint(4, 6)
-                }
-
-                // ⏱ Random interval 4–6 seconds
-                basic.pause(randint(4000, 6000))
-            }
-        })
     }
 
-    // 📡 Send interference packets
+    /**
+     * Send a radio number (mission-controlled)
+     * @param value number to send
+     */
+    //% block="Mission send number %value"
+    export function missionSend(value: number): void {
+
+        // Student controls WHAT and WHEN
+        radio.sendNumber(value)
+        sendCount++
+
+        // ⚡ Trigger interference
+        if (!shifted && sendCount >= triggerAt) {
+            radio.setGroup(baseChannel + 2)
+            shifted = true
+            sendInterference()
+            showInterference()
+        }
+        // 🔁 Return to base after next send
+        else if (shifted && sendCount >= triggerAt + 1) {
+            radio.setGroup(baseChannel)
+            shifted = false
+            sendCount = 0
+            triggerAt = randint(4, 6)
+        }
+    }
+
+    // 📡 Interference packets
     function sendInterference(): void {
-        for (let i = 0; i < 6; i++) {
+        for (let i = 0; i < 5; i++) {
             radio.sendNumber(randint(1000, 9999))
-            basic.pause(120)
         }
     }
 
     // ⚡ LED interference animation
     function showInterference(): void {
         basic.clearScreen()
-        for (let i = 0; i < 12; i++) {
+        for (let i = 0; i < 10; i++) {
             led.plot(randint(0, 4), randint(0, 4))
-            basic.pause(70)
+            basic.pause(60)
         }
         basic.clearScreen()
     }
