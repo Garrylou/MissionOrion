@@ -1,16 +1,10 @@
-# Mission 1 – micro:bit Extension
+# Mission 1 – Radio Interference Extension
 
-Mission-based radio controller for classroom escape games.
+Mission-based radio interference controller for micro:bit.
 
-## Features
-- Radio channel control
-- Random Button A trigger (5–8 presses)
-- Interference animation
-- Automatic channel shift (+2)
-- Return to base channel with confirmation
-
-## Usage
-Add the block:
-"Mission radio controller on channel X"
-
-Then press Button A during the mission.
+## Behavior
+- Press Button A several times (random 5–8)
+- Radio shifts to channel +2
+- Interference packets are sent
+- LED matrix shows interference
+- Next press returns to base channel
