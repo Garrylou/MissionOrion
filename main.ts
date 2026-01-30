@@ -1,6 +1,5 @@
 /**
- * Mission 1 Extension
- * Radio + interference + checkmark
+ * Mission 1 – Radio Interference
  */
 //% color="#FF8000" weight=100 icon="\uf1eb"
 namespace mission1 {
@@ -12,13 +11,12 @@ namespace mission1 {
     let initialized = false
 
     /**
-     * Mission radio controller
-     * Switches radio channel after random Button A presses
+     * Mission radio interference controller
      * @param channel base radio channel
      */
-    //% block="Mission radio controller on channel %channel"
+    //% block="Mission radio interference on channel %channel"
     //% channel.min=0 channel.max=83
-    export function missionRadio(channel: number): void {
+    export function missionInterference(channel: number): void {
 
         if (initialized) return
         initialized = true
@@ -33,37 +31,38 @@ namespace mission1 {
         input.onButtonPressed(Button.A, function () {
             pressCount++
 
-            // 🔀 SHIFT TO +2 (INTERFERENCE)
+            // ⚡ SHIFT TO +2 → INTERFERENCE
             if (!shifted && pressCount >= triggerAt) {
                 radio.setGroup(baseChannel + 2)
                 shifted = true
+                sendInterference()
                 showInterference()
             }
-            // ✅ RETURN TO BASE (CHECKMARK)
+            // 🔁 RETURN TO BASE
             else if (shifted) {
                 radio.setGroup(baseChannel)
                 shifted = false
                 pressCount = 0
                 triggerAt = randint(5, 8)
-                showCheckmark()
             }
         })
     }
 
-    // ⚡ Interference animation
-    function showInterference(): void {
-        basic.clearScreen()
-        for (let i = 0; i < 8; i++) {
-            led.plot(randint(0, 4), randint(0, 4))
-            basic.pause(120)
+    // 📡 Send radio interference packets
+    function sendInterference(): void {
+        for (let i = 0; i < 5; i++) {
+            radio.sendNumber(randint(1000, 9999))
+            basic.pause(100)
         }
-        basic.clearScreen()
     }
 
-    // ✅ Confirmation
-    function showCheckmark(): void {
-        basic.showIcon(IconNames.Yes)
-        basic.pause(800)
+    // ⚡ LED interference animation
+    function showInterference(): void {
+        basic.clearScreen()
+        for (let i = 0; i < 10; i++) {
+            led.plot(randint(0, 4), randint(0, 4))
+            basic.pause(80)
+        }
         basic.clearScreen()
     }
 }
