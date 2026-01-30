@@ -1,7 +1,7 @@
 {
     "name": "mission1",
-    "version": "1.0.0",
-    "description": "Mission 1 radio and interference extension for micro:bit",
+    "version": "1.1.0",
+    "description": "Mission 1 radio interference extension for micro:bit",
     "license": "MIT",
     "files": [
         "main.ts"
